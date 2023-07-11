@@ -1,17 +1,19 @@
 package Application;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.sql.Date;
 import java.util.UUID;
 
 @Entity
 public class Evento {
 
+    public enum TipoEvento { PUBBLICO, PRIVATO }
+
     @Id
     @GeneratedValue
     private UUID id;
     private String titolo;
-    private LocalDate dataEvento;
+    private Date dataEvento;
     private String descrizione;
     @Enumerated(EnumType.STRING)
     private TipoEvento tipoEvento;
@@ -19,7 +21,7 @@ public class Evento {
 
     public Evento() {}
 
-    public Evento(String titolo, TipoEvento tipoEvento, String descrizione, LocalDate dataEvento, int numeroMassimoPartecipanti) {
+    public Evento(String titolo, TipoEvento tipoEvento, String descrizione, Date dataEvento, int numeroMassimoPartecipanti) {
         this.titolo = titolo;
         this.tipoEvento = tipoEvento;
         this.descrizione = descrizione;
@@ -43,11 +45,11 @@ public class Evento {
 		this.titolo = titolo;
 	}
 
-	public LocalDate getDataEvento() {
+	public Date getDataEvento() {
 		return dataEvento;
 	}
 
-	public void setDataEvento(LocalDate dataEvento) {
+	public void setDataEvento(Date dataEvento) {
 		this.dataEvento = dataEvento;
 	}
 

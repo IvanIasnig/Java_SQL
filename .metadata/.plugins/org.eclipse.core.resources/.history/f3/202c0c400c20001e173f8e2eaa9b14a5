@@ -23,7 +23,7 @@ public class Application {
         EventoDAO ed = new EventoDAO(em);
 
         // *************** SAVE ***************
-           ed.save(festa);
+          // ed.save(festa);
           // ed.save(festa2);
 
         // *************** FIND BY ID **********
@@ -31,7 +31,7 @@ public class Application {
          // System.out.println(festaFromDB);
 
         // ***************** DELETE **************
-         // ed.findByIdAndDelete(UUID.fromString("3ddb5449-eb84-424b-8007-ae2e7e0ffa09"));
+         ed.findByIdAndDelete(UUID.fromString("3ddb5449-eb84-424b-8007-ae2e7e0ffa09"));
 
         // ****************** REFRESH *************
         // ed.refresh(festaUUID);

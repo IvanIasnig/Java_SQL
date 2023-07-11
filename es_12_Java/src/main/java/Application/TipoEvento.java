@@ -1,7 +1,3 @@
 package Application;
 
-public enum TipoEvento {
-    PUBBLICO, 
-    PRIVATO
-}
-
+public enum TipoEvento { PUBBLICO, PRIVATO }
