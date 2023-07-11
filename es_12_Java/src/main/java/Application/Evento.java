@@ -2,6 +2,7 @@ package Application;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.UUID;
 
 @Entity
 public class Evento {
@@ -9,8 +10,8 @@ public class Evento {
     public enum TipoEvento { PUBBLICO, PRIVATO }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue
+    private UUID id;
     private String titolo;
     private Date dataEvento;
     private String descrizione;
@@ -28,11 +29,11 @@ public class Evento {
         this.numeroMassimoPartecipanti = numeroMassimoPartecipanti;
     }
 
-	public Long getId() {
+	public UUID getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 

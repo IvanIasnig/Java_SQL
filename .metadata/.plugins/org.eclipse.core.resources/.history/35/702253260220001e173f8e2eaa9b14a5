@@ -1,0 +1,41 @@
+package Application;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+
+import java.sql.Date;
+
+public class Application {
+
+    private static EntityManagerFactory emf = JpaUtil.getEntityManagerFactory();
+
+    public static void main(String[] args) {
+
+        EntityManager em = emf.createEntityManager();
+
+        System.out.println("CIAO");
+
+        Evento festa = new Evento("Festa in piscina", Evento.TipoEvento.PUBBLICO, "Una festa in piscina", new Date(System.currentTimeMillis()), 100);
+        Evento festa2 = new Evento("Festa in giardino", Evento.TipoEvento.PRIVATO, "Una festa in GIARDINO", new Date(System.currentTimeMillis()), 100);
+        EventoDAO ed = new EventoDAO(em);
+
+        // *************** SAVE ***************
+         ed.save(festa);
+         ed.save(festa2);
+
+        // *************** FIND BY ID **********
+        // Evento festaFromDB = ed.findById(festaUUID);
+        // System.out.println(festaFromDB);
+
+        // ***************** DELETE **************
+        // ed.findByIdAndDelete(festaUUID);
+
+        // ****************** REFRESH *************
+        // ed.refresh(festaUUID);
+
+        em.close();
+        emf.close();
+
+    }
+}
+

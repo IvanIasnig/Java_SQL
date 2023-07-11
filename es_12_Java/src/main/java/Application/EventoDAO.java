@@ -1,8 +1,9 @@
 package Application;
 
+import java.util.UUID;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-import java.util.UUID;
 
 public class EventoDAO {
     private final EntityManager em;
@@ -24,8 +25,8 @@ public class EventoDAO {
         return found;
     }
 
-    public void findByIdAndDelete(UUID id) {
-        Evento found = em.find(Evento.class, id);
+    public void findByIdAndDelete(UUID i) {
+        Evento found = em.find(Evento.class, i);
         if (found != null) {
             EntityTransaction t = em.getTransaction();
             t.begin();

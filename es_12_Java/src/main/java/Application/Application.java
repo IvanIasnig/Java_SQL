@@ -8,34 +8,32 @@ import java.util.UUID;
 
 public class Application {
 
-    private static EntityManagerFactory emf;
+    private static EntityManagerFactory emf = JpaUtil.getEntityManagerFactory();
 
     public static void main(String[] args) {
 
-        // Creiamo l'EntityManagerFactory
         EntityManager em = emf.createEntityManager();
 
         System.out.println("CIAO");
 
         Evento festa = new Evento("Festa in piscina", Evento.TipoEvento.PUBBLICO, "Una festa in piscina", new Date(System.currentTimeMillis()), 100);
+        Evento festa2 = new Evento("Festa in giardino", Evento.TipoEvento.PRIVATO, "Una festa in GIARDINO", new Date(System.currentTimeMillis()), 100);
         EventoDAO ed = new EventoDAO(em);
 
         // *************** SAVE ***************
-        // ed.save(festa);
+          // ed.save(festa);
+          // ed.save(festa2);
 
         // *************** FIND BY ID **********
-        // Supponiamo che questo sia l'UUID dell'evento "festa"
-        // UUID festaUUID = UUID.fromString("123e4567-e89b-12d3-a456-426614174000");
-        // Evento festaFromDB = ed.findById(festaUUID);
-        // System.out.println(festaFromDB);
+         // Evento festaFromDB = ed.findById(festaUUID);
+         // System.out.println(festaFromDB);
 
         // ***************** DELETE **************
-        // ed.findByIdAndDelete(festaUUID);
+         ed.findByIdAndDelete(UUID.fromString("3ddb5449-eb84-424b-8007-ae2e7e0ffa09"));
 
         // ****************** REFRESH *************
         // ed.refresh(festaUUID);
 
-        // Ricordiamoci di chiudere entity manager & factory
         em.close();
         emf.close();
 
