@@ -2,10 +2,12 @@ package Location;
 
 import java.util.UUID;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+@Entity
 public class Location {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -39,4 +41,8 @@ public class Location {
     public void setCitta(String citta) {
         this.citta = citta;
 }
+    @Override
+    public String toString() {
+        return "Location [id=" + id + ", nome=" + nome + ", citta=" + citta + "]";
+    }
 }

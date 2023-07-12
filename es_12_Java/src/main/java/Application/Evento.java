@@ -1,7 +1,13 @@
 package Application;
 
 import javax.persistence.*;
+
+import Location.Location;
+import Partecipazione.Partecipazione;
+
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -16,15 +22,24 @@ public class Evento {
     @Enumerated(EnumType.STRING)
     private TipoEvento tipoEvento;
     private int numeroMassimoPartecipanti;
+    
+    @ManyToOne
+    @JoinColumn(name = "location_id")
+    private Location location;
+
+    @OneToMany
+    private Set<Partecipazione> partecipazioni = new HashSet<>();
+
 
     public Evento() {}
 
-    public Evento(String titolo, TipoEvento tipoEvento, String descrizione, LocalDate dataEvento, int numeroMassimoPartecipanti) {
+    public Evento(String titolo, TipoEvento tipoEvento, String descrizione, LocalDate dataEvento, int numeroMassimoPartecipanti,Location location) {
         this.titolo = titolo;
         this.tipoEvento = tipoEvento;
         this.descrizione = descrizione;
         this.dataEvento = dataEvento;
         this.numeroMassimoPartecipanti = numeroMassimoPartecipanti;
+        this.location = location;
     }
 
 	public UUID getId() {
@@ -74,6 +89,28 @@ public class Evento {
 	public void setNumeroMassimoPartecipanti(int numeroMassimoPartecipanti) {
 		this.numeroMassimoPartecipanti = numeroMassimoPartecipanti;
 	}
+	
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public Set<Partecipazione> getPartecipazioni() {
+        return partecipazioni;
+    }
+
+    public void addPartecipazione(Partecipazione partecipazione) {
+        this.partecipazioni.add(partecipazione);
+        partecipazione.setEvento(this);
+    }
+
+    public void removePartecipazione(Partecipazione partecipazione) {
+        this.partecipazioni.remove(partecipazione);
+        partecipazione.setEvento(null);
+    }
 }
 
 

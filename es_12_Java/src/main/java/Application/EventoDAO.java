@@ -14,9 +14,7 @@ public class EventoDAO {
 
     public void save(Evento evento) {
         EntityTransaction t = em.getTransaction();
-        t.begin();
         em.persist(evento);
-        t.commit();
         System.out.println("Evento salvato correttamente");
     }
 

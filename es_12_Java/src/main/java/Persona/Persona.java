@@ -1,15 +1,20 @@
 package Persona;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
+import Partecipazione.Partecipazione;
+
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 
-import Application.TipoEvento;
+
 
 @Entity
 public class Persona {
@@ -23,6 +28,10 @@ public class Persona {
     private String email;
     @Enumerated(EnumType.STRING)
     private PersonaSesso sesso;
+    
+    @OneToMany(mappedBy = "persona")
+    @OrderBy("dataEvento ASC")
+    private List<Partecipazione> listaPartecipazioni;
 
 
     public Persona() {}
@@ -31,10 +40,8 @@ public class Persona {
 		return id;
 	}
 
-	public Persona(UUID id, String nome, String cognome, LocalDate dataNascita, String email, PersonaSesso sesso,
-			int listaPartecipazioni) {
-		super();
-		this.id = id;
+	public Persona(String nome, String cognome, LocalDate dataNascita, String email, PersonaSesso sesso,
+			List<Partecipazione> listaPartecipazioni) {
 		this.nome = nome;
 		this.cognome = cognome;
 		this.dataNascita = dataNascita;
@@ -87,5 +94,16 @@ public class Persona {
 		this.sesso = sesso;
 	}
 
+    public List<Partecipazione> getListaPartecipazioni() {
+        return listaPartecipazioni;
+    }
 
+    public void setListaPartecipazioni(List<Partecipazione> listaPartecipazioni) {
+        this.listaPartecipazioni = listaPartecipazioni;
+    }
+
+    @Override
+    public String toString() {
+        return "Persona [id=" + id + ", nome=" + nome + ", cognome=" + cognome + ", email=" + email + ", dataDiNascita=" + dataNascita + ", sesso=" + sesso + "]";
+    }
 }

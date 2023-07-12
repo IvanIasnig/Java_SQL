@@ -3,8 +3,17 @@ package Application;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
+import Location.Location;
+import Location.LocationDAO;
+import Partecipazione.Partecipazione;
+import Partecipazione.PartecipazioneDAO;
+import Persona.Persona;
+import Persona.PersonaDAO;
+import Persona.PersonaSesso;
+
 import java.time.LocalDate;
-import java.util.UUID;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Application {
 
@@ -15,30 +24,32 @@ public class Application {
         EntityManager em = emf.createEntityManager();
 
         System.out.println("CIAO");
-        
-        
-        
-        Evento festa = new Evento("Festa in piscina", TipoEvento.PUBBLICO, "Una festa in piscina",  LocalDate.now(), 150);
-        // Evento festa2 = new Evento("Festa in giardino", TipoEvento.PRIVATO, "Una festa in GIARDINO", LocalDate.of(2023-08-08),200);
-        EventoDAO ed = new EventoDAO(em);
 
-        // *************** SAVE ***************
-           ed.save(festa);
-          // ed.save(festa2);
+        // Creare le entità e i DAO
+        PersonaDAO personaDao = new PersonaDAO(em);
+        LocationDAO locationDao = new LocationDAO(em);
+        EventoDAO eventoDao = new EventoDAO(em);
+        PartecipazioneDAO partecipazioneDao = new PartecipazioneDAO(em);
+        List<Partecipazione> partecipazioni = new ArrayList<>();
 
-        // *************** FIND BY ID **********
-         // Evento festaFromDB = ed.findById(festaUUID);
-         // System.out.println(festaFromDB);
+        Persona persona = new Persona("Mario", "Rossi", LocalDate.now(),"mario.rossi@gmail.com", PersonaSesso.MASCHIO, partecipazioni);
+        Location location = new Location("Luogo Fantastico", "Roma");
+        Evento evento = new Evento("Festa in piscina", TipoEvento.PUBBLICO, "Una festa in piscina",  LocalDate.now(), 150, location);
+        Partecipazione partecipazione = new Partecipazione(persona, evento, Partecipazione.Stato.DA_CONFERMARE);
 
-        // ***************** DELETE **************
-         // ed.findByIdAndDelete(UUID.fromString("3ddb5449-eb84-424b-8007-ae2e7e0ffa09"));
+        // Salva le entità nel database
+        em.getTransaction().begin();
 
-        // ****************** REFRESH *************
-        // ed.refresh(festaUUID);
+        personaDao.save(persona);
+        locationDao.save(location);
+        eventoDao.save(evento);
+        partecipazioneDao.save(partecipazione);
+
+        em.getTransaction().commit();
 
         em.close();
         emf.close();
-
     }
 }
+
 

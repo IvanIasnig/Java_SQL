@@ -1,5 +1,5 @@
 package Persona;
 
-public class PersonaSesso {
-
+public enum PersonaSesso {
+	MASCHIO, FEMMINA
 }

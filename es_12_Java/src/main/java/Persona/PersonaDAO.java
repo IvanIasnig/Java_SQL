@@ -13,13 +13,11 @@ public class PersonaDAO {
         this.em = em;
     }
 
-    public void save(Persona Persona) {
-        EntityTransaction t = em.getTransaction();
-        t.begin();
-        em.persist(Persona);
-        t.commit();
-        System.out.println("Persona salvato correttamente");
+    public void save(Persona persona) {
+        em.persist(persona);
+        System.out.println("Persona salvata correttamente");
     }
+
 
     public Persona findById(UUID id) {
         Persona found = em.find(Persona.class, id);

@@ -5,7 +5,6 @@ import java.util.UUID;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-import Application.Evento;
 
 public class LocationDAO {
     private final EntityManager em;
@@ -14,34 +13,32 @@ public class LocationDAO {
         this.em = em;
     }
 
-    public void save(Evento evento) {
+    public void save(Location Location) {
         EntityTransaction t = em.getTransaction();
-        t.begin();
-        em.persist(evento);
-        t.commit();
-        System.out.println("Evento salvato correttamente");
+        em.persist(Location);
+        System.out.println("Location salvato correttamente");
     }
 
-    public Evento findById(UUID id) {
-        Evento found = em.find(Evento.class, id);
+    public Location findById(UUID id) {
+        Location found = em.find(Location.class, id);
         return found;
     }
 
     public void findByIdAndDelete(UUID i) {
-        Evento found = em.find(Evento.class, i);
+        Location found = em.find(Location.class, i);
         if (found != null) {
             EntityTransaction t = em.getTransaction();
             t.begin();
             em.remove(found);
             t.commit();
-            System.out.println("Evento eliminato correttamente");
+            System.out.println("Location eliminato correttamente");
         } else {
-            System.out.println("Evento non trovato");
+            System.out.println("Location non trovato");
         }
     }
 
     public void refresh(UUID id) {
-        Evento found = em.find(Evento.class, id);
+        Location found = em.find(Location.class, id);
         if (found != null) {
             System.out.println("PRE REFRESH");
             System.out.println(found);
@@ -49,7 +46,7 @@ public class LocationDAO {
             System.out.println("POST REFRESH");
             System.out.println(found);
         } else {
-            System.out.println("Evento non trovato");
+            System.out.println("Location non trovato");
         }
     }
 }
