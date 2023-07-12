@@ -1,0 +1,21 @@
+package Location;
+
+import java.util.UUID;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+public Location() {}
+
+public class Location {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
+    private String nome;
+    private String citta;
+	public Location(String nome, String citta) {
+		this.nome = nome;
+		this.citta = citta;
+	}
+}

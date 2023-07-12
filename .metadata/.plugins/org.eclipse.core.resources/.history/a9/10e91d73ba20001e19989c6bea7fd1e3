@@ -1,0 +1,9 @@
+package Location;
+
+public class Location {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
+    private String nome;
+    private String citta;
+}
