@@ -7,7 +7,7 @@ public class JpaUtil {
     private static final EntityManagerFactory emf;
 
     static {
-        emf = Persistence.createEntityManagerFactory("pippo");
+        emf = Persistence.createEntityManagerFactory("es_12_Java");
     }
 
     public static EntityManagerFactory getEntityManagerFactory() {

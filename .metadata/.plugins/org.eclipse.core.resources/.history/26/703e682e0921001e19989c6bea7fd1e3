@@ -20,7 +20,6 @@ import javax.persistence.OrderBy;
 public class Persona {
 
     @Id
-    @GeneratedValue
     private UUID id;
     private String nome;
     private String cognome;
@@ -47,7 +46,6 @@ public class Persona {
 		this.dataNascita = dataNascita;
 		this.email = email;
 		this.sesso = sesso;
-		this.setListaPartecipazioni(listaPartecipazioni);
 	}
 
 	public void setId(UUID id) {

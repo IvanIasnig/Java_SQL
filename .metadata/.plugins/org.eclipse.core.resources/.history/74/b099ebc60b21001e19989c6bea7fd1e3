@@ -59,8 +59,8 @@ public class Application {
         partecipazioniLuigi.add(partecipazione2);
         partecipazioniLuigi.add(partecipazione3);
         
-        System.out.println(mario.getListaPartecipazioni());
-        System.out.println(luigi.getListaPartecipazioni());
+        System.out.println(mario);
+        System.out.println(luigi);
 
         em.getTransaction().commit();
 

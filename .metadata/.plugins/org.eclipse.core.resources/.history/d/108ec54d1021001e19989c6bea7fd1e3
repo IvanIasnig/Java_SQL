@@ -1,15 +1,11 @@
 package Location;
 
-import java.util.Set;
 import java.util.UUID;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-
-import Application.Evento;
 
 @Entity
 public class Location {
@@ -18,9 +14,6 @@ public class Location {
     private UUID id;
     private String nome;
     private String citta;
-    
-    @OneToMany(mappedBy = "location")
-    private Set<Evento> evento;
     
     public Location() {}
     

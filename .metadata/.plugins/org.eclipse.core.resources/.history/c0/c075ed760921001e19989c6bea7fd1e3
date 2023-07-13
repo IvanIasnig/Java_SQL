@@ -14,7 +14,6 @@ import Persona.PersonaSesso;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class Application {
 
@@ -31,11 +30,10 @@ public class Application {
         LocationDAO locationDao = new LocationDAO(em);
         EventoDAO eventoDao = new EventoDAO(em);
         PartecipazioneDAO partecipazioneDao = new PartecipazioneDAO(em);
-        List<Partecipazione> partecipazioniMario = new ArrayList<>();
-        List<Partecipazione> partecipazioniLuigi = new ArrayList<>();
+        List<Partecipazione> partecipazioni = new ArrayList<>();
 
-        Persona mario = new Persona("Mario", "Rossi", LocalDate.now(),"mario.rossi@gmail.com", PersonaSesso.MASCHIO, partecipazioniMario);
-        Persona luigi = new Persona("Luigi", "Mossi", LocalDate.now(),"mossi@gmail.com", PersonaSesso.MASCHIO, partecipazioniLuigi);
+        Persona mario = new Persona("Mario", "Rossi", LocalDate.now(),"mario.rossi@gmail.com", PersonaSesso.MASCHIO, partecipazioni);
+        Persona luigi = new Persona("Luigi", "Mossi", LocalDate.now(),"mossi@gmail.com", PersonaSesso.MASCHIO, partecipazioni);
         Location location = new Location("Luogo Fantastico", "Roma");
         Evento evento = new Evento("Festa in piscina", TipoEvento.PUBBLICO, "Una festa in piscina",  LocalDate.now(), 150, location);
         Partecipazione partecipazione = new Partecipazione(mario, evento, Partecipazione.Stato.DA_CONFERMARE);
@@ -46,21 +44,12 @@ public class Application {
         em.getTransaction().begin();
 
         personaDao.save(mario);
-        personaDao.save(luigi);
         locationDao.save(location);
         eventoDao.save(evento);
         partecipazioneDao.save(partecipazione);
         partecipazioneDao.save(partecipazione2);
         partecipazioneDao.save(partecipazione3);
-        
-        Persona p1 = personaDao.findById(UUID.fromString("44c63c8d-e15f-4d9b-851a-4e281fc48927"));
-        
-        partecipazioniMario.add(partecipazione);
-        partecipazioniLuigi.add(partecipazione2);
-        partecipazioniLuigi.add(partecipazione3);
-        
-        System.out.println(mario.getListaPartecipazioni());
-        System.out.println(luigi.getListaPartecipazioni());
+        System.out.println(mario.getListaPartecipazioni().add(partecipazione));
 
         em.getTransaction().commit();
 

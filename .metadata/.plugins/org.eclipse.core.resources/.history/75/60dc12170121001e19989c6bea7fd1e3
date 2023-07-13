@@ -13,7 +13,7 @@ public class Partecipazione {
     public enum Stato { CONFERMATA, DA_CONFERMARE }
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
     @ManyToOne
