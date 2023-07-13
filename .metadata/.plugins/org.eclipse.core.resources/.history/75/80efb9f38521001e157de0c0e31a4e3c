@@ -1,0 +1,45 @@
+package sottoEventi;
+
+import java.util.Set;
+
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
+import Application.Evento;
+import Persona.Persona;
+
+@Entity
+public class GaraDiAtletica extends Evento{
+    @OneToMany
+    private Set<Persona> atleti;
+    @OneToOne
+    private Persona vincitore;
+    
+
+    public GaraDiAtletica() {
+    }
+
+    public GaraDiAtletica(Set<Persona> atleti, Persona vincitore) {
+        this.atleti = atleti;
+        this.vincitore = vincitore;
+    }
+
+	public Set<Persona> getSetAtleti() {
+		return atleti;
+	}
+
+	public void setSetAtleti(Set<Persona> setAtleti) {
+		this.atleti = atleti;
+	}
+
+	public Persona getVincitore() {
+		return vincitore;
+	}
+
+	public void setVincitore(Persona vincitore) {
+		this.vincitore = vincitore;
+	}
+    
+
+}

@@ -1,0 +1,112 @@
+package Application;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+
+import Location.Location;
+import Location.LocationDAO;
+import Partecipazione.Partecipazione;
+import Partecipazione.PartecipazioneDAO;
+import Persona.Persona;
+import Persona.PersonaDAO;
+import Persona.PersonaSesso;
+import sottoEventi.Concerto;
+import sottoEventi.GaraDiAtletica;
+import sottoEventi.Genere;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
+
+public class Application {
+
+    private static EntityManagerFactory emf = JpaUtil.getEntityManagerFactory();
+
+    public static void main(String[] args) {
+
+        EntityManager em = emf.createEntityManager();
+
+        System.out.println("CIAO");
+
+        
+//      PersonaDAO personaDao = new PersonaDAO(em);
+        EventoDAO eventoDao = new EventoDAO(em);
+//      LocationDAO locationDao = new LocationDAO(em);
+
+//        PartecipazioneDAO partecipazioneDao = new PartecipazioneDAO(em);
+//        List<Partecipazione> partecipazioniMario = new ArrayList<>();
+//        List<Partecipazione> partecipazioniLuigi = new ArrayList<>();
+        Concerto concerto1 = new Concerto("Concerto Rock", TipoEvento.PUBBLICO, "Un concerto di musica rock", LocalDate.now(), 200, location, GenereConcerto.ROCK, true);
+        Concerto concerto2 = new Concerto("Concerto Pop", TipoEvento.PUBBLICO, "Un concerto di musica pop", LocalDate.now(), 150, location, GenereConcerto.POP, false);
+    
+
+//        Persona mario = new Persona("Mario", "Rossi", LocalDate.now(),"mario.rossi@gmail.com", PersonaSesso.MASCHIO, partecipazioniMario);
+//        Persona luigi = new Persona("Luigi", "Mossi", LocalDate.now(),"mossi@gmail.com", PersonaSesso.MASCHIO, partecipazioniLuigi);
+//        Location location = new Location("Luogo Fantastico", "Roma");
+//        Evento evento = new Evento("Festa in piscina", TipoEvento.PUBBLICO, "Una festa in piscina",  LocalDate.now(), 150, location);
+//        Partecipazione partecipazione = new Partecipazione(mario, evento, Partecipazione.Stato.DA_CONFERMARE);
+//        Partecipazione partecipazione2 = new Partecipazione(luigi, evento, Partecipazione.Stato.DA_CONFERMARE);
+//        Partecipazione partecipazione3 = new Partecipazione(luigi, evento, Partecipazione.Stato.DA_CONFERMARE);
+
+        
+        em.getTransaction().begin();
+        
+        em.getTransaction().begin();
+        eventoDao.save(concerto1);
+        eventoDao.save(concerto2);
+        em.getTransaction().commit();
+
+        // Utilizzare i metodi di EventoDAO
+        List<Concerto> concertiInStreaming = eventoDao.getConcertiInStreaming(true);
+
+        List<Genere> genereList = new ArrayList<>();
+        genereList.add(Genere.ROCK);
+        List<Concerto> concertiRock = eventoDao.getConcertiPerGenere(genereList);
+
+        // Stampa i risultati
+        System.out.println("Concerti in streaming:");
+        for (Concerto c : concertiInStreaming) {
+            System.out.println(c.getTitolo());
+        }
+
+        System.out.println("Concerti di genere rock:");
+        for (Concerto c : concertiRock) {
+            System.out.println(c.getTitolo());
+        }
+
+        em.close();
+        emf.close();
+        
+        
+        //------ Salva le entità nel database--------  ESERCIZIO MERCOLEDì
+//        em.getTransaction().begin();
+
+
+//        personaDao.save(mario);
+//        personaDao.save(luigi);
+//        locationDao.save(location);
+//        eventoDao.save(evento);
+//        partecipazioneDao.save(partecipazione);
+//        partecipazioneDao.save(partecipazione2);
+//        partecipazioneDao.save(partecipazione3);
+        
+//        Persona p1 = personaDao.findById(UUID.fromString("44c63c8d-e15f-4d9b-851a-4e281fc48927"));
+//        
+//        partecipazioniMario.add(partecipazione);
+//        partecipazioniLuigi.add(partecipazione2);
+//        partecipazioniLuigi.add(partecipazione3);
+//        
+//        System.out.println(mario.getListaPartecipazioni());
+//        System.out.println(luigi.getListaPartecipazioni());
+
+//        em.getTransaction().commit();
+//
+//        em.close();
+//        emf.close();
+    }
+}
+
+

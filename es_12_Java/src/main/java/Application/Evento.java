@@ -11,6 +11,8 @@ import java.util.Set;
 import java.util.UUID;
 
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="EVENT_TYPE")
 public class Evento {
 
     @Id

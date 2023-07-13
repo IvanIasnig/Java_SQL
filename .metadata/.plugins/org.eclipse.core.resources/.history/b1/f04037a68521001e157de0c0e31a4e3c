@@ -1,0 +1,21 @@
+package sottoEventi;
+
+public class PartitaDiCalcio  {
+
+    private String squadraCasa;
+    private String squadraOspite;
+    private String squadraVincente;
+    private int numeroGolSquadraCasa;
+    private int numeroGolSquadraOspite;
+    
+	public PartitaDiCalcio(String squadraCasa, String squadraOspite, String squadraVincente, int numeroGolSquadraCasa,
+			int numeroGolSquadraOspite) {
+		super();
+		this.squadraCasa = squadraCasa;
+		this.squadraOspite = squadraOspite;
+		this.squadraVincente = squadraVincente;
+		this.numeroGolSquadraCasa = numeroGolSquadraCasa;
+		this.numeroGolSquadraOspite = numeroGolSquadraOspite;
+	}
+	
+}

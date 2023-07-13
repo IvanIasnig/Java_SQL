@@ -1,0 +1,31 @@
+package sottoEventi;
+
+import java.time.LocalDate;
+
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+
+import Application.Evento;
+import Application.TipoEvento;
+import Location.Location;
+
+@Entity
+public class Concerto extends Evento {
+
+    @Enumerated(EnumType.STRING)
+    private Genere genere;
+    private boolean inStreaming;
+
+    public Concerto() {
+    }
+
+    public Concerto(String titolo, TipoEvento tipoEvento, String descrizione, LocalDate dataEvento, int limitePartecipanti, Location location, Genere genere, boolean inStreaming) {
+        super(titolo, tipoEvento, descrizione, dataEvento, limitePartecipanti, location);
+        this.genere = genere;
+        this.inStreaming = inStreaming;
+    }
+
+
+
+}

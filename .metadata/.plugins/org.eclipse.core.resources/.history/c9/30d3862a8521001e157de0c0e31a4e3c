@@ -1,0 +1,23 @@
+package sottoEventi;
+
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+
+@Entity
+public class Concerto extends Evento {
+
+    @Enumerated(EnumType.STRING)
+    private Genere genere;
+    private boolean inStreaming;
+
+    public Concerto() {
+    }
+
+    public Concerto(Genere genere, boolean inStreaming) {
+        this.genere = genere;
+        this.inStreaming = inStreaming;
+    }
+
+    // Getters and setters omitted for brevity
+}
