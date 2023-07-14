@@ -10,16 +10,10 @@ import Partecipazione.PartecipazioneDAO;
 import Persona.Persona;
 import Persona.PersonaDAO;
 import Persona.PersonaSesso;
-import sottoEventi.Concerto;
-import sottoEventi.GaraDiAtletica;
-import sottoEventi.Genere;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 
 public class Application {
@@ -30,40 +24,48 @@ public class Application {
 
         EntityManager em = emf.createEntityManager();
 
+        System.out.println("CIAO");
+
+        // Creare le entità e i DAO
+        PersonaDAO personaDao = new PersonaDAO(em);
+        LocationDAO locationDao = new LocationDAO(em);
         EventoDAO eventoDao = new EventoDAO(em);
+        PartecipazioneDAO partecipazioneDao = new PartecipazioneDAO(em);
 
-        Location location = new Location("Nome location", "Città");
+        Persona mario = new Persona("Mario", "Rossi", LocalDate.now(),"mario.rossi@gmail.com", PersonaSesso.MASCHIO, new ArrayList<>());
+        Persona luigi = new Persona("Luigi", "Mossi", LocalDate.now(),"mossi@gmail.com", PersonaSesso.MASCHIO, new ArrayList<>());
+        Location location = new Location("Luogo Fantastico", "Roma");
+        Evento evento = new Evento("Festa in piscina", TipoEvento.PUBBLICO, "Una festa in piscina",  LocalDate.now(), 150, location);
+        Partecipazione partecipazione = new Partecipazione(mario, evento, Partecipazione.Stato.DA_CONFERMARE);
+        Partecipazione partecipazione2 = new Partecipazione(luigi, evento, Partecipazione.Stato.DA_CONFERMARE);
+        Partecipazione partecipazione3 = new Partecipazione(luigi, evento, Partecipazione.Stato.DA_CONFERMARE);
 
-        
-        // Creare dei concerti e salvarli
-        Concerto concerto1 = new Concerto("Concerto Rock", TipoEvento.PUBBLICO, "Un concerto di musica rock", LocalDate.now(), 200, location, Genere.ROCK, true);
-        Concerto concerto2 = new Concerto("Concerto Pop", TipoEvento.PUBBLICO, "Un concerto di musica pop", LocalDate.now(), 150, location, Genere.POP, false);
-        
-        em.getTransaction().begin();
-        eventoDao.save(concerto1);
-        eventoDao.save(concerto2);
-        em.getTransaction().commit();
+        // Aggiungere le Partecipazione alle liste di Partecipazione di Mario e Luigi
+        mario.getListaPartecipazioni().add(partecipazione);
+        luigi.getListaPartecipazioni().add(partecipazione2);
+        luigi.getListaPartecipazioni().add(partecipazione3);
 
-        // Utilizzare i metodi di EventoDAO
-        List<Concerto> concertiInStreaming = eventoDao.getConcertiInStreaming(true);
-        List<Concerto> concertiRock = eventoDao.getConcertiPerGenere(Arrays.asList(Genere.ROCK));
+        // Iniziare la transazione e salvare le entità
+//        em.getTransaction().begin();
+//
+        personaDao.save(mario);
+//        personaDao.save(luigi);
+//        locationDao.save(location);
+//        eventoDao.save(evento);
+//        partecipazioneDao.save(partecipazione);
+//        partecipazioneDao.save(partecipazione2);
+//        partecipazioneDao.save(partecipazione3);
+//
+//        em.getTransaction().commit();
 
-        // Stampa i risultati
-        System.out.println("Concerti in streaming:");
-        for (Concerto c : concertiInStreaming) {
-            System.out.println(c.getTitolo());
-        }
-
-        System.out.println("Concerti di genere rock:");
-        for (Concerto c : concertiRock) {
-            System.out.println(c.getTitolo());
-        }
+        // Stampare le liste di Partecipazione
+//        System.out.println(mario.getListaPartecipazioni());
+//        System.out.println(luigi.getListaPartecipazioni());
+//        System.out.println(mario.getNome());
 
         em.close();
         emf.close();
     }
 }
-
-
 
 

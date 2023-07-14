@@ -7,8 +7,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 
-import sottoEventi.Concerto;
-import sottoEventi.Genere;
+//import sottoEventi.Concerto;
+//import sottoEventi.Genere;
 
 
 public class EventoDAO {
@@ -56,17 +56,17 @@ public class EventoDAO {
             System.out.println("Evento non trovato");
         }
     }
-    public List<Concerto> getConcertiInStreaming(boolean inStreaming) {
-        TypedQuery<Concerto> query = em.createQuery("SELECT c FROM Concerto c WHERE c.inStreaming = :inStreaming", Concerto.class);
-        query.setParameter("inStreaming", inStreaming);
-        return query.getResultList();
-    }
-
-    public List<Concerto> getConcertiPerGenere(List<Genere> generi) {
-        TypedQuery<Concerto> query = em.createQuery("SELECT c FROM Concerto c WHERE c.genere IN :generi", Concerto.class);
-        query.setParameter("generi", generi);
-        return query.getResultList();
-    }
+//    public List<Concerto> getConcertiInStreaming(boolean inStreaming) {
+//        TypedQuery<Concerto> query = em.createQuery("SELECT c FROM Concerto c WHERE c.inStreaming = :inStreaming", Concerto.class);
+//        query.setParameter("inStreaming", inStreaming);
+//        return query.getResultList();
+//    }
+//
+//    public List<Concerto> getConcertiPerGenere(List<Genere> generi) {
+//        TypedQuery<Concerto> query = em.createQuery("SELECT c FROM Concerto c WHERE c.genere IN :generi", Concerto.class);
+//        query.setParameter("generi", generi);
+//        return query.getResultList();
+//    }
 
 }
 

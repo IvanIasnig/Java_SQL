@@ -15,7 +15,9 @@ public class PartecipazioneDAO {
 
     public void save(Partecipazione Partecipazione) {
         EntityTransaction t = em.getTransaction();
+        t.begin();
         em.persist(Partecipazione);
+        t.commit();
         System.out.println("Partecipazione salvato correttamente");
     }
 

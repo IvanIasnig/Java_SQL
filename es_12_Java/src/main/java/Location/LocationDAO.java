@@ -15,8 +15,10 @@ public class LocationDAO {
 
     public void save(Location Location) {
         EntityTransaction t = em.getTransaction();
+        t.begin();
         em.persist(Location);
-        System.out.println("Location salvato correttamente");
+        t.commit();
+        System.out.println("Evento salvato correttamente");
     }
 
     public Location findById(UUID id) {

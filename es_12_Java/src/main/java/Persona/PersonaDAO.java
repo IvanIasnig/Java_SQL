@@ -14,7 +14,10 @@ public class PersonaDAO {
     }
 
     public void save(Persona persona) {
+        EntityTransaction t = em.getTransaction();
+        t.begin();
         em.persist(persona);
+        t.commit();
         System.out.println("Persona salvata correttamente");
     }
 

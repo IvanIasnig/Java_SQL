@@ -33,7 +33,6 @@ public class Persona {
     @OrderBy("dataEvento ASC")
     private List<Partecipazione> listaPartecipazioni;
 
-
     public Persona() {}
 
 	public UUID getId() {

@@ -31,6 +31,7 @@ public class Evento {
 	@OneToMany(mappedBy = "evento")
     private Set<Partecipazione> partecipazioni = new HashSet<>();
 
+	//costrutture, setters, getters e override del toString
 
     public Evento() {}
 

@@ -32,6 +32,8 @@ public class Partecipazione {
         this.evento = evento;
         this.stato = stato;
     }
+    
+    //setters, getters e override del toString
 
     public UUID getId() {
         return id;

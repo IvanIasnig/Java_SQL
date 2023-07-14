@@ -1,5 +1,5 @@
-package sottoEventi;
-
-public enum Genere {
-	CLASSICO, ROCK, POP
-}
+//package sottoEventi;
+//
+//public enum Genere {
+//	CLASSICO, ROCK, POP
+//}
